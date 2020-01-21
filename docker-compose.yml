@@ -1,0 +1,23 @@
+version: "3.0"
+services:
+  db:
+    image: tutum/mongodb
+    container_name: mongo-container
+    environment:
+      - AUTH=no
+    ports:
+      - 27017:27017
+      - 28017:28017
+    volumes:
+      - ./tmp:/data/db
+  historico:
+    image: jjpera/estudo-spring-historico
+    container_name: historico-container
+    environment:
+      - DB_DOMAIN=${DB_DOMAIN}
+    ports:
+      - 8081:8081
+    working_dir: /tmp
+    command: java -jar app.jar
+    depends_on:
+      - db
