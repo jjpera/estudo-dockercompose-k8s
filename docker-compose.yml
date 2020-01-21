@@ -1,4 +1,11 @@
 version: "3.0"
+      
+networks:
+  proxy:
+    #external: true
+  internal:
+    #external: false
+
 services:
   db:
     image: tutum/mongodb
@@ -8,10 +15,13 @@ services:
     ports:
       - 27017:27017
       - 28017:28017
+    networks:
+      - internal
     volumes:
-      - ./tmp:/data/db
+      - c:\temp:/data/db
   historico:
-    image: jjpera/estudo-spring-historico
+    #image: jjpera/estudo-spring-historico:0.1
+    build: ../estudo-spring-historico/spring-server-generated/.
     container_name: historico-container
     environment:
       - DB_DOMAIN=${DB_DOMAIN}
@@ -21,3 +31,6 @@ services:
     command: java -jar app.jar
     depends_on:
       - db
+    networks:
+      - internal
+      - proxy
