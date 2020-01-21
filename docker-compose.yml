@@ -18,7 +18,7 @@ services:
     networks:
       - internal
     volumes:
-      - c:\temp:/data/db
+      - ./temp:/data/db
   historico:
     #image: jjpera/estudo-spring-historico:0.1
     build: ../estudo-spring-historico/spring-server-generated/.
