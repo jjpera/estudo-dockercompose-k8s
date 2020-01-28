@@ -17,11 +17,9 @@ services:
       - 28017:28017
     networks:
       - internal
-    volumes:
-      - ./temp:/data/db
   historico:
-    #image: jjpera/estudo-spring-historico:0.1
-    build: ../estudo-spring-historico/spring-server-generated/.
+    image: jjpera/estudo-spring-historico:0.2
+    #build: ../estudo-spring-historico/spring-server-generated/.
     container_name: historico-container
     environment:
       - DB_DOMAIN=${DB_DOMAIN}
